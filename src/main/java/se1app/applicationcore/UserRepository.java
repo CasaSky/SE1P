@@ -15,8 +15,8 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     // Spring leitet die Query aus der Signatur ab
-    Optional<User> findByName(String userName);
-    Optional<User> findByEmailadress(String emailadress);
+    Optional<User> findByUserName(String userName);
+    Optional<User> findByEmail(Email email);
 
     // Hier definieren wir eine eigene SQL-Query (native)
     @Query(value = "SELECT * FROM USER WHERE EXISTS (SELECT * FROM TripDestination WHERE TripDestination.USER_ID=USER.ID AND TripDestination.DestinationName=:destinationName)", nativeQuery = true)

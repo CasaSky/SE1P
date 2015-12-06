@@ -2,6 +2,8 @@ package se1app.applicationcore;
 
 //import com.google.common.base.Preconditions;
 
+import org.hibernate.annotations.TypeDef;
+
 import javax.persistence.Embeddable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,7 +24,7 @@ public final class Email /*implements UserType */{
 
     public Email() {}
     private Email(String emailAdress) {
-       // Preconditions.checkNotNull(emailAdress);
+        // Preconditions.checkNotNull(emailAdress);
         //Preconditions.checkState(validate(emailAdress), "Invalid Email Adress!");
         this.emailAdress = emailAdress;
     }

@@ -11,7 +11,7 @@ import java.util.List;
  * Created by talal on 04.12.15.
  */
 @Entity
-public class TripDestination {
+public class Destination {
     @Id
     @GeneratedValue
     private Integer id;
@@ -26,7 +26,7 @@ public class TripDestination {
     @JoinColumn(name="tripDestination_id")
     private List<Activity> activities = new ArrayList<>();
 
-    public TripDestination(String destinationName, String destinationInfo, Date date, Integer periodInDays, String transport) {
+    public Destination(String destinationName, String destinationInfo, Date date, Integer periodInDays, String transport) {
         /*Preconditions.checkNotNull(destinationName);
         Preconditions.checkNotNull(destinationInfo);
         Preconditions.checkNotNull(date);
@@ -69,9 +69,9 @@ public class TripDestination {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TripDestination)) return false;
+        if (!(o instanceof Destination)) return false;
 
-        TripDestination that = (TripDestination) o;
+        Destination that = (Destination) o;
 
         if (!id.equals(that.id)) return false;
         if (!destinationName.equals(that.destinationName)) return false;
@@ -95,7 +95,7 @@ public class TripDestination {
 
     @Override
     public String toString() {
-        return "TripDestination{" +
+        return "Destination{" +
                 "id=" + id +
                 ", destinationName='" + destinationName + '\'' +
                 ", destinationInfo='" + destinationInfo + '\'' +

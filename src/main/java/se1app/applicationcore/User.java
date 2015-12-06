@@ -12,12 +12,12 @@ import java.util.List;
 /**
  * Created by talal on 04.12.15.
  */
+
 /*@TypeDef(
-        name = "email",
+        name = "Email",
         defaultForType = Email.class,
         typeClass = Email.class
 )*/
-
 @Entity
 public class User {
     private String userName;
@@ -25,11 +25,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
     private Integer age;
-    //@Basic(optional = true)
     //@Autowired
     //@Column(name = "EMAIL")
-    //@Type(type="email")
+    //@Type(type="Email")
     @Embedded
+    //@Basic
     private Email email;
     // Technische ID der Entitaet (Auto-generiert)
     @Id
@@ -41,7 +41,7 @@ public class User {
     // fineby in der jeweiligen Repository
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private List<TripDestination> destinations = new ArrayList<>();
+    private List<Destination> destinations = new ArrayList<>();
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private List<Friend> friends = new ArrayList<>();
@@ -63,7 +63,7 @@ public class User {
         //Preconditions.checkNotNull(calender);
         this.calender = calender;
     }
-    public void addDestination(TripDestination destination) {
+    public void addDestination(Destination destination) {
         //Preconditions.checkNotNull(destination);
         this.destinations.add(destination);
     }

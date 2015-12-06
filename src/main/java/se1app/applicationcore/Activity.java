@@ -3,9 +3,7 @@ package se1app.applicationcore;
 //import com.google.common.base.Preconditions;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by talal on 04.12.15.
@@ -18,8 +16,8 @@ public class Activity {
     private Date date;
     private Integer periodInDays;
     private String comments;
-    @OneToMany
-    private List<TripDestination> tripDestination = new ArrayList<>();
+    @ManyToOne
+    private Destination destination;
     public Activity(Date date, String comments, int periodInDays) {
         //Preconditions.checkNotNull(date);
         //Preconditions.checkNotNull(comments);
