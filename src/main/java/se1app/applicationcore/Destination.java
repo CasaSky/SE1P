@@ -15,10 +15,15 @@ public class Destination {
     @Id
     @GeneratedValue
     private Integer id;
+    @Column(name="DESTINATIONNAME")
     private String destinationName;
+    @Column(name="DESTINATIONINFO")
     private String destinationInfo;
+    @Column(name="DATE")
     private Date date;
+    @Column(name="PERSIODINDAYS")
     private Integer periodInDays;
+    @Column(name="TRANSPORT")
     private String transport;
 
     public List<Client> getClients() {

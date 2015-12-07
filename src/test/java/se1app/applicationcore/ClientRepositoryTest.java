@@ -48,7 +48,7 @@ public class ClientRepositoryTest {
         assertThat(client).hasSize(2);
     }
 
-   @Test
+    @Test
     public void testFindByClientName(){
         Optional<Client> client = clientRepository.findByClientName("Talal");
         StrictAssertions.assertThat(client.isPresent()); // Test -> isPresent client has a Value
@@ -61,16 +61,25 @@ public class ClientRepositoryTest {
         Optional<Client> client = clientRepository.findByEmail(Email.getEmail("talal.tabi@gmail.com"));
         StrictAssertions.assertThat(client.isPresent()); // Test -> isPresent client has a Value
         StrictAssertions.assertThat(client.get().getEmail().equals(Email.getEmail("talal.tabi@gmail.com")));
-        //assertThat(client.get().getDestinations()).hasSize(2);
+        assertThat(client.get().getDestinations()).hasSize(2);
     }
 
     @Test
     public void testFindClientsByDestinationName(){
         List<Client> clients = clientRepository.findClientsByDestinationName("Casablanca");
-        StrictAssertions.assertThat(!clients.isEmpty()); // Test -> isPresent client has a Value
-        for (Client client : clients)
-            StrictAssertions.assertThat(client.getDestinations().contains("Casablanca"));
         assertThat(clients).hasSize(2);
+
+        // Vergleich aufgrund der (hier technischen - besser fachlichen) IDs der Entitäten
+        // Die Customer-Objekte sind unterschiedlich, obwohl sie denselben Customer darstellen!
+        Client talal =  clientRepository.findByClientName("Talal").get();
+        Client lizzy =  clientRepository.findByClientName("Lizzy").get();
+        assertThat(clients).extracting(client -> client.getId())
+                .contains(talal.getId(), lizzy.getId());
+
+        // Alternativ, da equals der Entitäten entsprechend definiert
+        assertThat(clients).contains(
+                clientRepository.findByClientName("Talal").get(),
+                clientRepository.findByClientName("Lizzy").get());
     }
 
 }
