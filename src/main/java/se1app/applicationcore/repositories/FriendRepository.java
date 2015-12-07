@@ -13,7 +13,7 @@ import java.util.Optional;
  */
 @Repository
 public interface FriendRepository extends JpaRepository<Friend, Integer>{
-    Optional<Friend> findByFriendName(String friendName);
+    List<Friend> findByFriendName(String friendName);
 
-    List<Friend> findByClients(Client client);
+    List<Friend> findByClients(List<Client> client);
 }

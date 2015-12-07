@@ -34,11 +34,14 @@ public class ClientRepositoryTest {
         Client talal = new Client("Talal", Gender.MALE, 25, Email.getEmail("talal.tabi@gmail.com"));
         talal.addDestination(new Destination("Casablanca", "Summer", new Date(2016, 06, 01), 20, "Flugzeug"));
         talal.addDestination(new Destination("Marrakesch", "Summer", new Date(2016, 02, 01), 10, "Flugzeug"));
+        talal.addFriend(new Friend("Kyo"));
+        talal.addFriend(new Friend("Lizzy"));
         // Kaskadierendes Speichern der Reservierungen durch entsprechende 'Cascade'-Angabe in Customer!
         clientRepository.save(talal);
 
         Client lizzy = new Client("Elizabeth", Gender.FEMALE, 25, Email.getEmail("lizzy@gmail.com"));
         lizzy.addDestination(new Destination("Casablanca", "Summer", new Date(2016, 06, 01), 20, "Flugzeug"));
+        lizzy.addFriend(new Friend("Kyo"));
         clientRepository.save(lizzy);
     }
 
@@ -81,5 +84,24 @@ public class ClientRepositoryTest {
                 clientRepository.findByClientName("Talal").get(),
                 clientRepository.findByClientName("Lizzy").get());
     }
+
+    @Test
+    public void testFindClientsByFriendName(){
+        List<Client> clients = clientRepository.findClientsByFriendName("Kyo");
+        assertThat(clients).hasSize(2);
+
+        // Vergleich aufgrund der (hier technischen - besser fachlichen) IDs der Entitäten
+        // Die Customer-Objekte sind unterschiedlich, obwohl sie denselben Customer darstellen!
+        Client talal =  clientRepository.findByClientName("Talal").get();
+        Client lizzy =  clientRepository.findByClientName("Lizzy").get();
+        assertThat(clients).extracting(client -> client.getId())
+                .contains(talal.getId(), lizzy.getId());
+
+        // Alternativ, da equals der Entitäten entsprechend definiert
+        assertThat(clients).contains(
+                clientRepository.findByClientName("Talal").get(),
+                clientRepository.findByClientName("Lizzy").get());
+    }
+
 
 }

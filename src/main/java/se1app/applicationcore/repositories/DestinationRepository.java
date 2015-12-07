@@ -18,7 +18,8 @@ import java.util.Optional;
 public interface DestinationRepository extends JpaRepository<Destination, Integer> {
 
     // Spring leitet die Query aus der Signatur ab
-    Optional<Destination> findByDate(Date date);
+    List<Destination> findByDate(Date date);
+    List<Destination> findByDestinationName(String destinationName);
 
     List<Destination>findByClients(Client client);
 

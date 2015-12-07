@@ -34,7 +34,7 @@ public class Destination {
         return activities;
     }
 
-    @ManyToMany
+    @ManyToMany(mappedBy="destinations")
     private List<Client> clients = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="destination_id")

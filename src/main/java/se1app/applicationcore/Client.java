@@ -40,7 +40,7 @@ public class Client {
     // Name der Fremdschlüßel für die Verwendung in der Query
     // fineby in der jeweiligen Repository
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "CLIENT_ID")
+    @JoinColumn(name = "client_id")
     private List<Destination> destinations = new ArrayList<>();
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id")

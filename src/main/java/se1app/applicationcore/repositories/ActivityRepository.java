@@ -15,8 +15,8 @@ import java.util.Optional;
 @Repository
 public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 
-    Optional<Activity> findByDate(Date date);
-    Optional<Activity> findByPeriodInDays(Integer periodInDays);
+    List<Activity> findByDate(Date date);
+    List<Activity> findByPeriodInDays(Integer periodInDays);
     List<Activity> findByDestination(Destination destination);
 
 }
