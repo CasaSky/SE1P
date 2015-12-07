@@ -15,7 +15,7 @@ public class Friend {
     private Integer friendNr;
     private String friendName;
     @ManyToMany
-    private List<User> user = new ArrayList<>();
+    private List<Client> clients = new ArrayList<>();
 
     public Friend(String friendName) {
         //Preconditions.checkNotNull(friendName);

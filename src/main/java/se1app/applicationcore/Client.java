@@ -2,8 +2,7 @@ package se1app.applicationcore;
 
 
 //import com.google.common.base.Preconditions;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
+import se1app.applicationcore.complexDataTyp.Email;
 import se1app.applicationcore.complexDataTyp.Gender;
 
 import javax.persistence.*;
@@ -19,8 +18,8 @@ import java.util.List;
         typeClass = Email.class
 )*/
 @Entity
-public class User {
-    private String userName;
+public class Client {
+    private String clientName;
     @Column(name = "GENDER")
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -35,26 +34,27 @@ public class User {
     @Id
     @GeneratedValue
     private Integer id;
+
     // Definion *:* Beziehung
     // Kasadoerende Operationen
     // Name der Fremdschlüßel für die Verwendung in der Query
     // fineby in der jeweiligen Repository
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "client_id")
     private List<Destination> destinations = new ArrayList<>();
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "client_id")
     private List<Friend> friends = new ArrayList<>();
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "client_id")
     private Calender calender;
 
 
-    public User(String userName, Gender gender, Integer age, Email email) {
-        //Preconditions.checkNotNull(userName);
+    public Client(String clientName, Gender gender, Integer age, Email email) {
+        //Preconditions.checkNotNull(clientName);
         //Preconditions.checkNotNull(age);
         this.gender = gender;
-        this.userName = userName;
+        this.clientName = clientName;
         this.age = age;
         this.email = email;
     }
@@ -76,8 +76,8 @@ public class User {
         return id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getClientName() {
+        return clientName;
     }
 
     public Gender getGender() {
@@ -92,26 +92,32 @@ public class User {
         return email;
     }
 
+    public List<Destination> getDestinations() { return destinations; }
+
+    public List<Friend> getFriends() { return friends; }
+
+    public Calender getCalender() { return calender; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User)) return false;
+        if (!(o instanceof Client)) return false;
 
-        User user = (User) o;
+        Client client = (Client) o;
 
-        if (!userName.equals(user.userName)) return false;
-        if (!gender.equals(user.gender)) return false;
-        if (!age.equals(user.age)) return false;
-        if (!email.equals(user.email)) return false;
-        if (!id.equals(user.id)) return false;
-        if (!destinations.equals(user.destinations)) return false;
-        return friends.equals(user.friends);
+        if (!clientName.equals(client.clientName)) return false;
+        if (!gender.equals(client.gender)) return false;
+        if (!age.equals(client.age)) return false;
+        if (!email.equals(client.email)) return false;
+        if (!id.equals(client.id)) return false;
+        if (!destinations.equals(client.destinations)) return false;
+        return friends.equals(client.friends);
 
     }
 
     @Override
     public int hashCode() {
-        int result = userName.hashCode();
+        int result = clientName.hashCode();
         result = 31 * result + gender.hashCode();
         result = 31 * result + age.hashCode();
         result = 31 * result + email.hashCode();
@@ -123,8 +129,8 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "userName='" + userName + '\'' +
+        return "Client{" +
+                "clientName='" + clientName + '\'' +
                 ", gender=" + gender +
                 ", age=" + age +
                 ", email=" + email +

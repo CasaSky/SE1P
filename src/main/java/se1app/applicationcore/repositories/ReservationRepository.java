@@ -1,7 +1,9 @@
-package se1app.applicationcore;
+package se1app.applicationcore.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import se1app.applicationcore.Customer;
+import se1app.applicationcore.Reservation;
 
 import java.util.List;
 

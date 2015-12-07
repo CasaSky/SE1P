@@ -17,7 +17,7 @@ public class Calender {
     private Date tripDate;
     private String tripDetails;
     @OneToOne
-    private User user;
+    private Client client;
 
     public Calender(Date tripDate, String tripDetails) {
         //Preconditions.checkNotNull(tripDate);
@@ -48,7 +48,7 @@ public class Calender {
         if (!calenderNr.equals(calender.calenderNr)) return false;
         if (!tripDate.equals(calender.tripDate)) return false;
         if (!tripDetails.equals(calender.tripDetails)) return false;
-        return user.equals(calender.user);
+        return client.equals(calender.client);
 
     }
 
@@ -57,7 +57,7 @@ public class Calender {
         int result = calenderNr.hashCode();
         result = 31 * result + tripDate.hashCode();
         result = 31 * result + tripDetails.hashCode();
-        result = 31 * result + user.hashCode();
+        result = 31 * result + client.hashCode();
         return result;
     }
 
@@ -67,7 +67,7 @@ public class Calender {
                 "calenderNr=" + calenderNr +
                 ", tripDate=" + tripDate +
                 ", tripDetails='" + tripDetails + '\'' +
-                ", user=" + user +
+                ", client=" + client +
                 '}';
     }
 }

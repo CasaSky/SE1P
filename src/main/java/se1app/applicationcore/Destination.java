@@ -20,10 +20,19 @@ public class Destination {
     private Date date;
     private Integer periodInDays;
     private String transport;
+
+    public List<Client> getClients() {
+        return clients;
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
     @ManyToMany
-    private List<User> user = new ArrayList<>();
+    private List<Client> clients = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="tripDestination_id")
+    @JoinColumn(name="destination_id")
     private List<Activity> activities = new ArrayList<>();
 
     public Destination(String destinationName, String destinationInfo, Date date, Integer periodInDays, String transport) {
